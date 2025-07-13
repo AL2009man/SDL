@@ -27,8 +27,6 @@ typedef struct SDL_SteamVirtualGamepadInfo
     Uint16 vendor_id;
     Uint16 product_id;
     SDL_GamepadType type;
-    bool has_gyro;
-    bool has_accel;
 } SDL_SteamVirtualGamepadInfo;
 
 void SDL_InitSteamVirtualGamepadInfo(void);

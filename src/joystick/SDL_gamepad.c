@@ -3301,17 +3301,18 @@ bool SDL_GamepadHasSensor(SDL_Gamepad *gamepad, SDL_SensorType type)
     {
         SDL_Joystick *joystick = SDL_GetGamepadJoystick(gamepad);
         if (joystick) {
-            // Check Steam Input sensors first
-            if (SDL_SteamVirtualGamepadEnabled() && SDL_SteamVirtualGamepadHasSensor(joystick->instance_id, type)) {
-                result = true;
-            } else {
-                int i;
-                for (i = 0; i < joystick->nsensors; ++i) {
-                    if (joystick->sensors[i].type == type) {
-                        result = true;
-                        break;
-                    }
+            int i;
+            // First check the standard joystick sensors
+            for (i = 0; i < joystick->nsensors; ++i) {
+                if (joystick->sensors[i].type == type) {
+                    result = true;
+                    break;
                 }
+            }
+            
+            // If not found in standard sensors, check Steam Input as fallback
+            if (!result && SDL_SteamVirtualGamepadEnabled()) {
+                result = SDL_SteamVirtualGamepadHasSensor(joystick->instance_id, type);
             }
         }
     }
