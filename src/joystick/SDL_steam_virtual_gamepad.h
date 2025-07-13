@@ -27,6 +27,8 @@ typedef struct SDL_SteamVirtualGamepadInfo
     Uint16 vendor_id;
     Uint16 product_id;
     SDL_GamepadType type;
+    bool has_gyro;
+    bool has_accel;
 } SDL_SteamVirtualGamepadInfo;
 
 void SDL_InitSteamVirtualGamepadInfo(void);
@@ -34,3 +36,4 @@ bool SDL_SteamVirtualGamepadEnabled(void);
 bool SDL_UpdateSteamVirtualGamepadInfo(void);
 const SDL_SteamVirtualGamepadInfo *SDL_GetSteamVirtualGamepadInfo(int slot);
 void SDL_QuitSteamVirtualGamepadInfo(void);
+bool SDL_SteamVirtualGamepadHasSensor(SDL_JoystickID instance_id, SDL_SensorType type);

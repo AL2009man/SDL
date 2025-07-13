@@ -217,6 +217,10 @@ bool SDL_UpdateSteamVirtualGamepadInfo(void)
                     info.type = SDL_GetGamepadTypeFromString(value);
                 } else if (SDL_strcmp(line, "handle") == 0) {
                     info.handle = (Uint64)SDL_strtoull(value, NULL, 0);
+                } else if (SDL_strcmp(line, "has_gyro") == 0) {
+                    info.has_gyro = SDL_atoi(value) ? true : false;
+                } else if (SDL_strcmp(line, "has_accel") == 0) {
+                    info.has_accel = SDL_atoi(value) ? true : false;
                 }
             }
         }
@@ -251,4 +255,31 @@ void SDL_QuitSteamVirtualGamepadInfo(void)
         SDL_free(SDL_steam_virtual_gamepad_info_file);
         SDL_steam_virtual_gamepad_info_file = NULL;
     }
+}
+
+bool SDL_SteamVirtualGamepadHasSensor(SDL_JoystickID instance_id, SDL_SensorType type)
+{
+    int i;
+
+    SDL_AssertJoysticksLocked();
+
+    if (!SDL_steam_virtual_gamepad_info) {
+        return false;
+    }
+
+    for (i = 0; i < SDL_steam_virtual_gamepad_info_count; ++i) {
+        const SDL_SteamVirtualGamepadInfo *info = SDL_steam_virtual_gamepad_info[i];
+        if (info && info->handle == (Uint64)instance_id) {
+            switch (type) {
+            case SDL_SENSOR_GYRO:
+                return info->has_gyro;
+            case SDL_SENSOR_ACCEL:
+                return info->has_accel;
+            default:
+                return false;
+            }
+        }
+    }
+
+    return false;
 }
