@@ -296,6 +296,8 @@ static bool HIDAPI_DriverSteamDeck_InitDevice(SDL_HIDAPI_Device *device)
 
     device->context = ctx;
 
+    device->type = SDL_GAMEPAD_TYPE_STEAM_DECK;
+
     // Read a report to see if this is the correct endpoint.
     // Mouse, Keyboard and Controller have the same VID/PID but
     // only the controller hidraw device receives hid reports.

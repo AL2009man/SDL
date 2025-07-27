@@ -1118,6 +1118,8 @@ static bool HIDAPI_DriverSteam_InitDevice(SDL_HIDAPI_Device *device)
     ctx->device = device;
     device->context = ctx;
 
+    device->type = SDL_GAMEPAD_TYPE_STEAM_CONTROLLER;
+
 #ifdef SDL_PLATFORM_WIN32
     if (device->serial) {
         // We get a garbage serial number on Windows
