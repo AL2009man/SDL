@@ -1034,6 +1034,10 @@ static bool HIDAPI_DriverSteam_IsEnabled(void)
 
 static bool HIDAPI_DriverSteam_IsSupportedDevice(SDL_HIDAPI_Device *device, const char *name, SDL_GamepadType type, Uint16 vendor_id, Uint16 product_id, Uint16 version, int interface_number, int interface_class, int interface_subclass, int interface_protocol)
 {
+    if (type == SDL_GAMEPAD_TYPE_STEAM_CONTROLLER) {
+        return true;
+    }
+
     if (!SDL_IsJoystickSteamController(vendor_id, product_id)) {
         return false;
     }
@@ -1128,7 +1132,24 @@ static bool HIDAPI_DriverSteam_InitDevice(SDL_HIDAPI_Device *device)
     }
 #endif // SDL_PLATFORM_WIN32
 
-    HIDAPI_SetDeviceName(device, "Steam Controller");
+    if (device->vendor_id == USB_VENDOR_VALVE) {
+        switch (device->product_id) {
+        case 0x1101:
+            HIDAPI_SetDeviceName(device, "Steam Controller Chell");
+            break;
+        case 0x1201:
+        case 0x1202:
+        case 0x1102:
+        case 0x1105:
+        case 0x1106:
+        case 0x1142:
+        default:
+            HIDAPI_SetDeviceName(device, "Steam Controller");
+            break;
+        }
+    } else {
+        HIDAPI_SetDeviceName(device, "Steam Controller");
+    }
 
     // If this is a wireless dongle, request a wireless state update
     if (IsDongle(device->product_id)) {
