@@ -35,6 +35,7 @@
 #include "SDL_waylandwindow.h"
 #include "SDL_waylandmouse.h"
 #include "SDL_waylandclipboard.h"
+#include "SDL_waylandkeyboard.h"
 
 #include "pointer-constraints-unstable-v1-client-protocol.h"
 #include "relative-pointer-unstable-v1-client-protocol.h"
@@ -1434,7 +1435,7 @@ static void Wayland_KeymapIterator(struct xkb_keymap *keymap, xkb_keycode_t key,
     }
 
     for (xkb_layout_index_t layout = 0; layout < seat->keyboard.xkb.num_layouts; ++layout) {
-        const xkb_level_index_t num_levels = WAYLAND_xkb_keymap_num_levels_for_key(seat->keyboard.xkb.keymap, key, seat->keyboard.xkb.current_layout);
+        const xkb_level_index_t num_levels = WAYLAND_xkb_keymap_num_levels_for_key(seat->keyboard.xkb.keymap, key, layout);
         for (xkb_level_index_t level = 0; level < num_levels; ++level) {
             if (WAYLAND_xkb_keymap_key_get_syms_by_level(seat->keyboard.xkb.keymap, key, layout, level, &syms) > 0) {
                 /* If the keyboard is virtual or the key didn't have a corresponding hardware scancode, try to
@@ -1897,7 +1898,7 @@ static void keyboard_handle_enter(void *data, struct wl_keyboard *keyboard,
     Wayland_DisplayUpdatePointerGrabs(seat->display, window);
 
     // Update text input and IME focus.
-    Wayland_UpdateTextInput(seat->display);
+    Wayland_SeatUpdateTextInput(seat);
 
 #ifdef SDL_USE_IME
     if (!seat->text_input.zwp_text_input) {
@@ -1979,7 +1980,7 @@ static void keyboard_handle_leave(void *data, struct wl_keyboard *keyboard,
     seat->keyboard.pressed_modifiers = SDL_KMOD_NONE;
 
     // Update text input and IME focus.
-    Wayland_UpdateTextInput(seat->display);
+    Wayland_SeatUpdateTextInput(seat);
 
 #ifdef SDL_USE_IME
     if (!seat->text_input.zwp_text_input && !window->keyboard_focus_count) {
