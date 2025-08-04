@@ -1084,8 +1084,8 @@ static const char *map_StringForGamepadType[] = {
     "joyconright",
     "joyconpair",
     "gamecube",
-    "steam controller",
-    "steam deck",
+    "steamcontroller",
+    "steamdeck",
 };
 SDL_COMPILE_TIME_ASSERT(map_StringForGamepadType, SDL_arraysize(map_StringForGamepadType) == SDL_GAMEPAD_TYPE_COUNT);
 
@@ -1482,9 +1482,6 @@ static SDL_GamepadFaceStyle SDL_GetGamepadFaceStyleForGamepadType(SDL_GamepadTyp
         return SDL_GAMEPAD_FACE_STYLE_BAYX;
     case SDL_GAMEPAD_TYPE_GAMECUBE:
         return SDL_GAMEPAD_FACE_STYLE_AXBY;
-    case SDL_GAMEPAD_TYPE_STEAM_CONTROLLER:
-    case SDL_GAMEPAD_TYPE_STEAM_DECK:
-        return SDL_GAMEPAD_FACE_STYLE_ABXY;
     default:
         return SDL_GAMEPAD_FACE_STYLE_ABXY;
     }
