@@ -1038,6 +1038,11 @@ static bool HIDAPI_DriverSteam_IsSupportedDevice(SDL_HIDAPI_Device *device, cons
         return true;
     }
 
+    // Don't claim Steam Deck devices - let the Steam Deck driver handle them
+    if (vendor_id == USB_VENDOR_VALVE && product_id == USB_PRODUCT_VALVE_STEAM_DECK) {
+        return false;
+    }
+
     if (!SDL_IsJoystickSteamController(vendor_id, product_id)) {
         return false;
     }

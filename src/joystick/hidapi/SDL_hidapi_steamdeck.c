@@ -281,6 +281,11 @@ static bool HIDAPI_DriverSteamDeck_IsSupportedDevice(
         return true;
     }
 
+    // Steam Deck built-in controller
+    if (vendor_id == USB_VENDOR_VALVE && product_id == USB_PRODUCT_VALVE_STEAM_DECK) {
+        return true;
+    }
+
     if (!SDL_IsJoystickSteamDeck(vendor_id, product_id)) {
         return false;
     }

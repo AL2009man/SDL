@@ -117,6 +117,12 @@ static void AddVirtualGamepadInfo(int slot, SDL_SteamVirtualGamepadInfo *info)
         return;
     }
     SDL_copyp(new_info, info);
+    
+    // Override type for Steam Deck hardware to ensure correct detection
+    if (SDL_IsJoystickSteamDeck(new_info->vendor_id, new_info->product_id)) {
+        new_info->type = SDL_GAMEPAD_TYPE_STEAM_DECK;
+    }
+    
     SDL_steam_virtual_gamepad_info[slot] = new_info;
     SDL_zerop(info);
 }
