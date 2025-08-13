@@ -102,6 +102,14 @@ EControllerType GuessControllerType( int nVID, int nPID )
 		{
 			return k_eControllerType_SwitchProController;
 		}
+		if ( SDL_strncasecmp( pszOverride, "SteamDeck", 9 ) == 0 )
+		{
+			return k_eControllerType_SteamControllerNeptune;
+		}
+		if ( SDL_strncasecmp( pszOverride, "SteamController", 15 ) == 0 )
+		{
+			return k_eControllerType_SteamController;
+		}
 		if ( SDL_strncasecmp( pszOverride, "Steam", 5 ) == 0 )
 		{
 			return k_eControllerType_SteamController;

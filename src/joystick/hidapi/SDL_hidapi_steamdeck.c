@@ -307,6 +307,7 @@ static bool HIDAPI_DriverSteamDeck_InitDevice(SDL_HIDAPI_Device *device)
         return false;
 
     HIDAPI_SetDeviceName(device, "Steam Deck");
+    device->type = SDL_GAMEPAD_TYPE_STEAM_DECK;
 
     return HIDAPI_JoystickConnected(device, NULL);
 }

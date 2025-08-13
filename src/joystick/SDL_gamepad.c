@@ -916,6 +916,14 @@ static GamepadMapping_t *SDL_CreateMappingForHIDAPIGamepad(SDL_GUID guid)
                     SDL_strlcat(mapping_string, "paddle1:b16,paddle2:b15,paddle3:b14,paddle4:b13,", sizeof(mapping_string));
                 }
                 break;
+            case SDL_GAMEPAD_TYPE_STEAM_CONTROLLER:
+                // Steam Controllers have trackpads instead of traditional sticks
+                // These will be handled by the Steam driver
+                break;
+            case SDL_GAMEPAD_TYPE_STEAM_DECK:
+                // Steam Deck has additional controls like trackpads, paddles, etc.
+                // These will be handled by the Steam Deck driver
+                break;
             case SDL_GAMEPAD_TYPE_XBOXONE:
                 if (SDL_IsJoystickXboxOneElite(vendor, product)) {
                     // XBox One Elite Controllers have 4 back paddle buttons
@@ -1085,7 +1093,9 @@ static const char *map_StringForGamepadType[] = {
     "joyconleft",
     "joyconright",
     "joyconpair",
-    "gamecube"
+    "gamecube",
+    "steamcontroller",
+    "steamdeck"
 };
 SDL_COMPILE_TIME_ASSERT(map_StringForGamepadType, SDL_arraysize(map_StringForGamepadType) == SDL_GAMEPAD_TYPE_COUNT);
 
@@ -1482,6 +1492,9 @@ static SDL_GamepadFaceStyle SDL_GetGamepadFaceStyleForGamepadType(SDL_GamepadTyp
         return SDL_GAMEPAD_FACE_STYLE_BAYX;
     case SDL_GAMEPAD_TYPE_GAMECUBE:
         return SDL_GAMEPAD_FACE_STYLE_AXBY;
+    case SDL_GAMEPAD_TYPE_STEAM_CONTROLLER:
+    case SDL_GAMEPAD_TYPE_STEAM_DECK:
+        return SDL_GAMEPAD_FACE_STYLE_ABXY;
     default:
         return SDL_GAMEPAD_FACE_STYLE_ABXY;
     }

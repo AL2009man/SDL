@@ -1127,6 +1127,7 @@ static bool HIDAPI_DriverSteam_InitDevice(SDL_HIDAPI_Device *device)
 #endif // SDL_PLATFORM_WIN32
 
     HIDAPI_SetDeviceName(device, "Steam Controller");
+    device->type = SDL_GAMEPAD_TYPE_STEAM_CONTROLLER;
 
     // If this is a wireless dongle, request a wireless state update
     if (IsDongle(device->product_id)) {
