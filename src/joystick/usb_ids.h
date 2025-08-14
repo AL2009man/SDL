@@ -145,6 +145,14 @@
 #define USB_PRODUCT_XBOX_SERIES_X_POWERA_FUSION_PRO2      0x4001
 #define USB_PRODUCT_XBOX_SERIES_X_POWERA_SPECTRA          0x4002
 #define USB_PRODUCT_XBOX_ONE_XBOXGIP_CONTROLLER           0x02ff /* XBOXGIP driver software PID */
+#define USB_PRODUCT_STEAM_CONTROLLER_V1                   0x1101 /* Legacy Steam Controller (CHELL) */
+#define USB_PRODUCT_STEAM_CONTROLLER                      0x1102 /* Wired Steam Controller (D0G) */
+#define USB_PRODUCT_STEAM_CONTROLLER_BLUETOOTH_V1         0x1105 /* Bluetooth Steam Controller (D0G) */
+#define USB_PRODUCT_STEAM_CONTROLLER_BLUETOOTH            0x1106 /* Bluetooth Steam Controller (D0G) */
+#define USB_PRODUCT_STEAM_CONTROLLER_WIRELESS             0x1142 /* Wireless Steam Controller */
+#define USB_PRODUCT_STEAM_CONTROLLER_V2                   0x1201 /* Wired Steam Controller (HEADCRAB) */
+#define USB_PRODUCT_STEAM_CONTROLLER_V2_BLUETOOTH         0x1202 /* Bluetooth Steam Controller (HEADCRAB) */
+#define USB_PRODUCT_STEAM_DECK                            0x1205 /* Steam Deck Built-in Controller */
 #define USB_PRODUCT_STEAM_VIRTUAL_GAMEPAD                 0x11ff
 
 /* USB usage pages */

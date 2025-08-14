@@ -2601,6 +2601,19 @@ SDL_GameControllerType SDL_GetJoystickGameControllerTypeFromVIDPID(Uint16 vendor
                 product == USB_PRODUCT_NVIDIA_SHIELD_CONTROLLER_V104)) {
         type = SDL_CONTROLLER_TYPE_NVIDIA_SHIELD;
 
+    } else if (vendor == USB_VENDOR_VALVE) {
+        if (product == USB_PRODUCT_STEAM_DECK) {
+            type = SDL_CONTROLLER_TYPE_STEAM_DECK;
+        } else if (product == USB_PRODUCT_STEAM_CONTROLLER_V1 ||
+                   product == USB_PRODUCT_STEAM_CONTROLLER ||
+                   product == USB_PRODUCT_STEAM_CONTROLLER_BLUETOOTH_V1 ||
+                   product == USB_PRODUCT_STEAM_CONTROLLER_BLUETOOTH ||
+                   product == USB_PRODUCT_STEAM_CONTROLLER_WIRELESS ||
+                   product == USB_PRODUCT_STEAM_CONTROLLER_V2 ||
+                   product == USB_PRODUCT_STEAM_CONTROLLER_V2_BLUETOOTH) {
+            type = SDL_CONTROLLER_TYPE_STEAM_CONTROLLER;
+        }
+
     } else {
         switch (GuessControllerType(vendor, product)) {
         case k_eControllerType_XBox360Controller:
@@ -2635,6 +2648,13 @@ SDL_GameControllerType SDL_GetJoystickGameControllerTypeFromVIDPID(Uint16 vendor
             } else {
                 type = SDL_CONTROLLER_TYPE_UNKNOWN;
             }
+            break;
+        case k_eControllerType_SteamController:
+        case k_eControllerType_SteamControllerV2:
+            type = SDL_CONTROLLER_TYPE_STEAM_CONTROLLER;
+            break;
+        case k_eControllerType_SteamDeck:
+            type = SDL_CONTROLLER_TYPE_STEAM_DECK;
             break;
         default:
             break;

@@ -803,7 +803,9 @@ static const char *map_StringForGameControllerType[] = {
     "nvidiashield",
     "joyconleft",
     "joyconright",
-    "joyconpair"
+    "joyconpair",
+    "steamcontroller",
+    "steamdeck"
 };
 SDL_COMPILE_TIME_ASSERT(map_StringForGameControllerType, SDL_arraysize(map_StringForGameControllerType) == SDL_CONTROLLER_TYPE_MAX);
 

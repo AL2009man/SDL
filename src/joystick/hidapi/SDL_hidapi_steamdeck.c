@@ -277,6 +277,7 @@ static SDL_bool HIDAPI_DriverSteamDeck_InitDevice(SDL_HIDAPI_Device *device)
     if (!DisableDeckLizardMode(device->dev))
         return SDL_FALSE;
 
+    device->type = SDL_CONTROLLER_TYPE_STEAM_DECK;
     HIDAPI_SetDeviceName(device, "Steam Deck");
 
     return HIDAPI_JoystickConnected(device, NULL);

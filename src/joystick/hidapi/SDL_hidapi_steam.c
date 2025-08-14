@@ -986,6 +986,7 @@ static SDL_bool HIDAPI_DriverSteam_InitDevice(SDL_HIDAPI_Device *device)
     }
 #endif /* __WIN32__ */
 
+    device->type = SDL_CONTROLLER_TYPE_STEAM_CONTROLLER;
     HIDAPI_SetDeviceName(device, "Steam Controller");
 
     return HIDAPI_JoystickConnected(device, NULL);
