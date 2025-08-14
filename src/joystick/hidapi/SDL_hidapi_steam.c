@@ -964,6 +964,9 @@ static SDL_bool HIDAPI_DriverSteam_IsEnabled(void)
 
 static SDL_bool HIDAPI_DriverSteam_IsSupportedDevice(SDL_HIDAPI_Device *device, const char *name, SDL_GameControllerType type, Uint16 vendor_id, Uint16 product_id, Uint16 version, int interface_number, int interface_class, int interface_subclass, int interface_protocol)
 {
+    if (type == SDL_CONTROLLER_TYPE_STEAM_CONTROLLER) {
+        return SDL_TRUE;
+    }
     return SDL_IsJoystickSteamController(vendor_id, product_id);
 }
 

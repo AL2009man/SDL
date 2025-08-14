@@ -247,6 +247,9 @@ static SDL_bool HIDAPI_DriverSteamDeck_IsSupportedDevice(
     int interface_subclass,
     int interface_protocol)
 {
+    if (type == SDL_CONTROLLER_TYPE_STEAM_DECK) {
+        return SDL_TRUE;
+    }
     return SDL_IsJoystickSteamDeck(vendor_id, product_id);
 }
 
