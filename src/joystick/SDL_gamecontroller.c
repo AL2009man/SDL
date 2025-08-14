@@ -640,6 +640,14 @@ static ControllerMapping_t *SDL_CreateMappingForHIDAPIController(SDL_JoystickGUI
                     SDL_strlcat(mapping_string, "touchpad:b16,", sizeof(mapping_string));
                 }
                 break;
+            case SDL_CONTROLLER_TYPE_STEAM_CONTROLLER:
+                /* Steam controllers have 2 back paddle buttons */
+                SDL_strlcat(mapping_string, "paddle1:b16,paddle2:b15,", sizeof(mapping_string));
+                break;
+            case SDL_CONTROLLER_TYPE_STEAM_DECK:
+                /* Steam Deck has 4 back paddle buttons */
+                SDL_strlcat(mapping_string, "paddle1:b16,paddle2:b15,paddle3:b18,paddle4:b17,", sizeof(mapping_string));
+                break;
             default:
                 if (vendor == 0 && product == 0) {
                     /* This is a Bluetooth Nintendo Switch Pro controller */
