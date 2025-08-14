@@ -2976,6 +2976,24 @@ SDL_GamepadType SDL_GetGamepadTypeFromVIDPID(Uint16 vendor, Uint16 product, cons
     } else if (forUI && SDL_IsJoystickGameCube(vendor, product)) {
         type = SDL_GAMEPAD_TYPE_GAMECUBE;
 
+    } else if (vendor == USB_VENDOR_VALVE) {
+        switch (product) {
+        case USB_PRODUCT_VALVE_STEAM_CONTROLLER_LEGACY:
+        case USB_PRODUCT_VALVE_STEAM_CONTROLLER_WIRED:
+        case USB_PRODUCT_VALVE_STEAM_CONTROLLER_BLUETOOTH:
+        case USB_PRODUCT_VALVE_STEAM_CONTROLLER_BLUETOOTH2:
+        case USB_PRODUCT_VALVE_STEAM_CONTROLLER_WIRELESS:
+        case USB_PRODUCT_VALVE_STEAM_CONTROLLER_V2_WIRED:
+        case USB_PRODUCT_VALVE_STEAM_CONTROLLER_V2_BLUETOOTH:
+            type = SDL_GAMEPAD_TYPE_STEAM_CONTROLLER;
+            break;
+        case USB_PRODUCT_VALVE_STEAM_DECK_CONTROLLER:
+            type = SDL_GAMEPAD_TYPE_STEAM_DECK;
+            break;
+        default:
+            break;
+        }
+
     } else {
         switch (GuessControllerType(vendor, product)) {
         case k_eControllerType_XBox360Controller:

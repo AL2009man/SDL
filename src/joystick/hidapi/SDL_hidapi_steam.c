@@ -1034,6 +1034,10 @@ static bool HIDAPI_DriverSteam_IsEnabled(void)
 
 static bool HIDAPI_DriverSteam_IsSupportedDevice(SDL_HIDAPI_Device *device, const char *name, SDL_GamepadType type, Uint16 vendor_id, Uint16 product_id, Uint16 version, int interface_number, int interface_class, int interface_subclass, int interface_protocol)
 {
+    if (type == SDL_GAMEPAD_TYPE_STEAM_CONTROLLER) {
+        return true;
+    }
+
     if (!SDL_IsJoystickSteamController(vendor_id, product_id)) {
         return false;
     }
