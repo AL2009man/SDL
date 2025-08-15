@@ -1042,6 +1042,11 @@ static bool HIDAPI_DriverSteam_IsSupportedDevice(SDL_HIDAPI_Device *device, cons
         return false;
     }
 
+    if (!device) {
+        // Might be supported by this driver, enumerate and find out
+        return true;
+    }
+
     if (device->is_bluetooth) {
         return true;
     }
