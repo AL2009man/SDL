@@ -766,9 +766,11 @@ static bool mgmtthrtask_PrepDevice(void *userdata)
         }
 #endif
 
+#if (NTDDI_VERSION >= NTDDI_WIN81)
         if (SDL_GetHintBoolean(SDL_HINT_AUDIO_DEVICE_RAW_STREAM, false)) {
             audioProps.Options = AUDCLNT_STREAMOPTIONS_RAW;
         }
+#endif
 
         ret = IAudioClient2_SetClientProperties(client2, &audioProps);
         if (FAILED(ret)) {
